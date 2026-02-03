@@ -44,6 +44,32 @@
   width: 100%;
   height: 100%;
   max-height: 400px;
-  object-fit: cover;     
+  object-fit: contain;     
   display: block;
+}
+.comment {
+  border-left: 2px solid #e5e7eb;   /* light gray thread line */
+  padding-left: 12px;
+  margin-top: 12px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Author name */
+.comment-author {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #374151; /* dark gray */
+}
+
+/* Comment text */
+.comment-body {
+  margin: 4px 0 0 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #111827; /* almost black */
+  white-space: pre-wrap; /* keeps line breaks */
+}
+h5 {
+  text-decoration-line: underline;
+  text-decoration-color: green;
 }

@@ -31,7 +31,7 @@ export default function Homepage(){
             {loading && <p>Loading News...</p>}
             {error && <p>Error: {error.message}</p>}
             <ul>
-                {data.map(post => (<Postcard post={post.data}/>))} {/*post is the prop name which is passed to postcard*/}
+                {data.map(post => (<Postcard key={post.data.id} post={post.data}/>))} {/*post is the prop name which is passed to postcard*/}
             </ul>
         </>
     )
