@@ -1,8 +1,5 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,16 +10,54 @@
 .card-container{
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  padding: 2px 16px;
+  padding: 16px;
   margin-bottom: 20px;
   background-color: gainsboro;
-  border-radius: 5px;
+  border: 1px solid #ccc;
+  border-radius: 14px;
+}
+.card-container:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3); /* Intensify shadow */
+  background-color: #e0e0e0; /* Slightly darken background */
+  transform: translateY(-5px); /* Lift the card up */
 }
 .stats {
   display: flex;
   flex-direction: row;
   gap: 15px; 
-  align-items: center; 
+  align-items: center;
+  margin-top: 20px; 
+}
+.stats button,
+.stats a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;        /* pill shape */
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: rgba(0,0,0,0.04);
+  color: #111827;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.stats button:hover,
+.stats a:hover {
+  background: rgba(0,0,0,0.08);
+}
+.stats button:active {
+  transform: scale(0.97);
+}
+.stats button:focus-visible,
+.stats a:focus-visible {
+  outline: 2px solid rgba(0,0,0,0.3);
+  outline-offset: 2px;
+}
+.stats svg {
+  font-size: 0.9rem;
 }
 .selftext {
   display: -webkit-box;
@@ -30,7 +65,9 @@
   -webkit-box-orient: vertical;  
   overflow: hidden;
   line-clamp: 3;
-  line-height: 1;
+  line-height: 1.4;
+  color: muted;
+  margin-top: 10px;
 }
 .image-preview-img {
   width: 100%;
@@ -72,4 +109,114 @@
 h5 {
   text-decoration-line: underline;
   text-decoration-color: green;
+  margin-left: 10px;
+}
+.layout {
+  display: flex;
+  min-height: 100vh;
+  display: flex;
+  padding-top: 56px;
+}
+
+.main-content {
+  flex: 1;               /* take remaining space */
+  padding: 16px;
+  margin-left: 250px;
+  padding: 1rem;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 8px;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #111827;
+}
+
+.nav-link.active {
+  font-weight: 600;
+  background: rgba(0,0,0,0.06);
+}
+.nav-link:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid rgba(0,0,0,0.25);
+  outline-offset: 2px;
+}
+/* Sidebar example width */
+.sidebar {
+  width: 250px;
+  position: fixed;
+  left: 0;
+  top: 56px;
+  height: calc(100vh - 56px);
+  transition: transform 0.25s ease;
+}
+
+/* Hamburger button */
+.menu-btn {
+  position: fixed;
+  z-index: 2000;
+  transition: left 0.25s ease;
+  top: 72px;
+}
+
+/* when sidebar is CLOSED, button goes to far left */
+.menu-btn.btn-left {
+  left: 16px;
+}
+
+/* when sidebar is OPEN, button sits beside sidebar */
+.menu-btn.btn-shifted {
+  left: 250px;   /* sidebar width */
+  margin-left: 16px; /* gap */
+}
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+.app-header{
+  height: 56px;              /* pick what you want: 48–64px is common */
+  padding: 8px 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: sticky;
+  z-index: 2000;
+  top:0;
+  background: white;
+}
+
+/* Only target the logo inside header */
+.app-header img{
+  height: 100%;              /* fill the header height */
+  width: auto;               /* keep aspect ratio */
+  max-height: 40px;          /* optional: keeps it smaller than header */
+  object-fit: contain;       /* avoids stretching */
+  display: block;
+  max-width: 100%;
+}
+.search input{
+  border-width: 1px;
+  border-style: solid;
+  border-color: orangered;
+  height: 30px;
+  width: 300px;
+  border-radius: 30px;
+  text-align: center;
 }

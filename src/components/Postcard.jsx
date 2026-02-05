@@ -6,7 +6,7 @@
 
 
 
-import React from 'react';
+import React,{useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpLong } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +14,18 @@ import { Link } from 'react-router-dom';
 
 export default function Postcard({post}){
     const detailPath = `/r/${post.subreddit}/comments/${post.id}`;
+    const [upvote,setUpvote] = useState(post.ups);
+    const [hasUpvoted,sethasUpvoted] = useState(false);
+
+    function increaseUpvote(){
+        if(hasUpvoted === true){
+            sethasUpvoted(false)
+            setUpvote(prev => prev - 1)
+        } else {
+            setUpvote(prev => prev + 1)
+            sethasUpvoted(true)
+        }
+    }
 
     const imageUrl = post.preview?.images?.[0]?.source?.url
     ?.replace(/&amp;/g, "&");
@@ -39,8 +51,8 @@ export default function Postcard({post}){
                     )}
                 </div>
                 <div className='stats'>
-                    <p><FontAwesomeIcon icon={faUpLong} />{post.ups}</p>
-                    <p><FontAwesomeIcon icon={faComment} />{post.num_comments}</p>
+                    <button onClick={increaseUpvote}><FontAwesomeIcon icon={faUpLong}/>{upvote}</button>
+                    <button><FontAwesomeIcon icon={faComment} /><Link to={detailPath}>{post.num_comments}</Link></button>
                 </div>
             </div>
         </>
