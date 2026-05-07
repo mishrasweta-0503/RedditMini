@@ -27,7 +27,16 @@ export default function Postdetail(){
     useEffect(() => {
         const fetchData = async() => {
             try {
-                const response = await fetch(`/reddit/comments/${postId}.json`);
+                const response = await fetch(`https://www.reddit.com/r/${subreddit}/comments/${postId}.json`,{
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`Reddit API responded with status: ${response.status}`);
+                }
                 const result = await response.json();
                 //console.log('Output of result: ', result)
                 setPostDetail(result[0]?.data?.children?.[0]?.data);

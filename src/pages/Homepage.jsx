@@ -11,7 +11,7 @@ export default function Homepage(){
     const[data,setData] = useState([]);
     const[loading,setLoading] = useState(true);
     const[error,setError] = useState(null);
-    const url = subreddit ? `/reddit/r/${subreddit}.json` : '/reddit/r/popular.json';
+    const url = subreddit ? `https://www.reddit.com/r/${subreddit}.json` : 'https://www.reddit.com/r/popular.json';
     
 
     useEffect(() => {
@@ -19,7 +19,16 @@ export default function Homepage(){
             setLoading(true)
             setError(null)
             try {
-                const response = await fetch(url);
+                const response = await fetch(url,{
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`Reddit API responded with status: ${response.status}`);
+                }
                 const result = await response.json();
                 setData(result.data.children); //result is the entire thing that we receive from reddit
             } catch (error) {

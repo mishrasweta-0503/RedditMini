@@ -1,12 +1,4 @@
 [[redirects]]
-  from = "/reddit/*"
-  to = "https://www.reddit.com/:splat"
-  status = 200
-  force = true
-  [redirects.headers]
-    User-Agent = "MiniRedditPortfolio/1.0"
-
-[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

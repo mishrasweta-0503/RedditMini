@@ -19,9 +19,18 @@ export default function SearchResults(){
                 }else{
                     setLoading(true);
                     setError(null);
-                    const response = await fetch(`/reddit/search.json?q=${encodeURIComponent(q)}`);
+                    const response = await fetch(`https://www.reddit.com/search.json?q=${encodeURIComponent(q)}`,{
+                        method: 'GET',
+                        mode: 'cors',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    if (!response.ok) {
+                        throw new Error(`Reddit API responded with status: ${response.status}`);
+                    }
                     const result = await response.json();
-                    setResults(result.data.children);
+                    setResults(result?.data?.children || []);
                 }                
             } catch (error) {
                 setError(error);
